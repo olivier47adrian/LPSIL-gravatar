@@ -15,18 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/listAvatars', function () {
-    return view('listAvatars');
-});
-
-Route::get('/avatars/add', function () {
-    return view('addAvatar');
-});
-
-Route::post('/addAvatar', [
-    'as' => 'addAvatar', 'uses' => 'AvatarController@add'
-]);
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -45,5 +33,19 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
-    Route::get('/home', 'HomeController@index');
+    Route::get('/home', 'AvatarController@listAvatars');
+
+
+
+    Route::get('/listAvatars', [
+        'as' => 'listAvatars', 'uses' => 'AvatarController@listAvatars'
+    ]);
+
+    Route::get('/avatars/add', function () {
+        return view('addAvatar');
+    });
+
+    Route::post('/addAvatar', [
+        'as' => 'addAvatar', 'uses' => 'AvatarController@listAvatars'
+    ]);
 });

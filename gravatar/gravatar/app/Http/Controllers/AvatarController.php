@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Avatar;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 
 class AvatarController extends Controller
 {
@@ -26,18 +29,38 @@ class AvatarController extends Controller
      */
     public function add(Request $request)
     {
-            $recipes = new Recipes();
+        /*  $recipes = new Recipes();
 
-            $recipes->title = $request->title;
-            $recipes->description = $request->description;
-            $recipes->note = $request->note;
-            $recipes->save();
+          $recipes->title = $request->title;
+          $recipes->description = $request->description;
+          $recipes->note = $request->note;
+          $recipes->save();*/
 
-            $tabRow = Recipes::all();
+            return view('addAvatar');
 
+    }
 
-            return view('reponse', ['tabRow' => $tabRow]);
+    /**
+     * list of avatars.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function listAvatars(Request $request)
+    {
+        if(isset($request->request->email)){
+            $avatar = new Avatar();
 
+            $avatar->title = $request->title;
+            $avatar->description = $request->description;
+            $avatar->note = $request->note;
+            $avatar->save();
+        }
+
+        $user_id = Auth::id();
+        $tabRow = Avatar::where('user_id', '=', $user_id)->get();
+
+        return view('listAvatars', ['tabRow' => $tabRow]);
     }
 
 

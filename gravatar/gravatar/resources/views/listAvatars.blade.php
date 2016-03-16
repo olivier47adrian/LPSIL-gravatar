@@ -9,6 +9,22 @@
                 <div class="panel-heading">List of avatars</div>
 
                 <div class="panel-body">
+                    <table>
+                        <tr>
+                            <th width="100">Id :</th>
+                            <th>email : </th>
+                            <th>srcImage : </th>
+                            <th>Option : </th>
+                        </tr>
+                    @foreach ($tabRow as $row)
+                            <tr>
+                                <td>{{ $row->id }}</td>
+                                <td>{{ $row->email }}</td>
+                                <td><img src="{{ $row->srcImage }}"/></td>
+                                <td><span class="glyphicon glyphicon-remove" style="color: red; font-size: 40px;"></span></td>
+                            </tr>
+                    @endforeach
+                    </table>
                 </div>
             </div>
         </div>
