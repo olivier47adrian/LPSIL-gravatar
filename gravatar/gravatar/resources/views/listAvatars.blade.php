@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+                <a class="btn btn-success btn-lg" href="{{ url('/avatars/add') }}" role="button"><span class="glyphicon glyphicon-plus"></span></a>
             <div class="panel panel-default">
                 <div class="panel-heading">List of avatars</div>
 
