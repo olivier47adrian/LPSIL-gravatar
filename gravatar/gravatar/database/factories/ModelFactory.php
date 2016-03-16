@@ -27,4 +27,13 @@ $factory->defineAs(App\User::class, 'admin', function ($faker) {
     ];
 });
 
+$factory->define(App\Avatar::class, function (Faker\Generator $faker) {
+    return [
+        'email' => $faker->email,
+        'srcImage' => "http://lorempixel.com/100/100",
+        'user_id' => "1"
+    ];
+});
+
+
 

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AvatarTable extends Migration
+class CreateAvatarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,14 @@ class AvatarTable extends Migration
      */
     public function up()
     {
-        Schema::create('avatar', function (Blueprint $table) {
+        Schema::create('avatars', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email', 60);
+            $table->string('srcImage', 100);
+            $table->timestamps();
             $table->integer('user_id')->unsigned();
         });
-        Schema::table('avatar', function (Blueprint $table) {
+        Schema::table('avatars', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
@@ -29,6 +31,6 @@ class AvatarTable extends Migration
      */
     public function down()
     {
-        Schema::drop('avatar');
+        Schema::drop('avatars');
     }
 }
