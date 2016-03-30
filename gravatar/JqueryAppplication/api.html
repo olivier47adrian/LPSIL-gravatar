@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GravatarAPI</title>
+    <script type="text/javascript" src="jquery-1.12.2.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<center><h1>Gravatar API</h1></center><br/><br/><br/>
+
+<div class="row">
+    <div class="col-md-3">
+            <center><button id="buttonInfo">Infos <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></center><br/><br/>
+                <div id="infos" class="alert alert-info" role="alert">
+                </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default" style="height: 300px;">
+            <div class="panel-heading"><center>Form</center></div>
+            <div class="panel-body">
+                <form id="form" method="post" name="formEmail" action="">
+                    <label for="email">Email :</label>
+                    <input type="email" name="email" id="email">
+                    <input type="submit" id="submit" value="submit"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="panel panel-default" style="height: 300px;">
+            <div class="panel-heading"><center>Avatar</center></div>
+            <div class="panel-body" id="imageAvatar">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('#buttonInfo').click(function(){
+        $.ajax({
+            url: "http://localhost/lpsil/laravel/gravatar/gravatar/public/gravatarAPI/man",
+            type: 'GET',
+            success: function(data) {
+                $("#infos").html("Version : " + data.message.version + "<br/>" + "Size available : " + data.message.sizeAvailable + "<br/>" + "Default size : " + data.message.defaultSize + "<br/>" + "File extension support : " + data.message.fileSupport);
+            }
+        })
+    });
+
+    $('#form').submit(function(event){
+        event.preventDefault();
+        $.ajax({
+            url: "http://localhost/lpsil/laravel/gravatar/gravatar/public/gravatarAPI/getAvatar/" + $('#email').val() ,
+            type: 'GET',
+            success: function(data) {
+                $("#imageAvatar").html("<img id='theImg' src='http://localhost/lpsil/laravel/gravatar/gravatar/public/"+ data.message[0]+ "'/>");
+            }
+        })
+    });
+
+</script>
+</body>
+</html>

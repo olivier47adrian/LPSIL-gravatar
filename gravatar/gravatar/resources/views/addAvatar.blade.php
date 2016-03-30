@@ -7,13 +7,14 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Add an avatar</div>
                     <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/addAvatar') }}">
+                        {{ Form::open(array('url' => '/addAvatar', 'method' => 'post', 'files'=> true, 'onsubmit' => 'verifImage(this); return false;')) }}
+                        {!! csrf_field() !!}
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input type="email" class="form-control" name="email">
+                                {{Form::email('email','',array('required' => 'required')) }}
 
                             </div>
                         </div>
@@ -22,24 +23,31 @@
                             <label class="col-md-4 control-label">Image</label>
 
                             <div class="col-md-6">
-                                <input type="file" class="form-control" name="file">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                                {{Form::file('image') }}
 
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-success">
-                                    <i class="fa fa-btn fa-sign-in"></i>Add this avatar
-                                </button>
+                                {{Form::submit('Add this avatar')}}
+
                             </div>
                         </div>
-                    </form>
+                        {{ Form::close() }}
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function verifImage() {
+            alert("test");
+            image = document.getElementById("image");
+            console.log(image.value);
+            return false;
+        }
+    </script>
 @endsection

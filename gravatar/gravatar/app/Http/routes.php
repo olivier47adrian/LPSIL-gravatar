@@ -26,6 +26,9 @@ Route::get('/', function () {
 |
 */
 
+
+
+
 Route::group(['middleware' => ['web']], function () {
     //
 });
@@ -48,4 +51,20 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/addAvatar', [
         'as' => 'addAvatar', 'uses' => 'AvatarController@listAvatars'
     ]);
+
+    Route::get('/removeAvatar/{id}',  [
+        'as' => 'removeAvatar', 'uses' => 'AvatarController@removeAvatar'
+    ], function ($id) {
+        return $id;
+    });
+
+    Route::get('/gravatarAPI/man',  [
+        'as' => 'gravatarAPIman', 'uses' => 'ApiController@man'
+    ]);
+
+    Route::get('/gravatarAPI/getAvatar/{email}',  [
+        'as' => 'gravatarAPIget', 'uses' => 'ApiController@getAvatar'
+    ], function ($email) {
+        return $email;
+    });
 });

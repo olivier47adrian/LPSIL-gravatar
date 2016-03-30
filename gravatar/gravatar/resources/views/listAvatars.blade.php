@@ -20,8 +20,8 @@
                             <tr>
                                 <td>{{ $row->id }}</td>
                                 <td>{{ $row->email }}</td>
-                                <td><img src="{{ $row->srcImage }}"/></td>
-                                <td><span class="glyphicon glyphicon-remove" style="color: red; font-size: 40px;"></span></td>
+                                <td><img alt="#" width="100" src="{{$row->srcImage }}"/></td>
+                                <td><a href="{{ url('/removeAvatar') }}/{{$row->id}}" onclick="return confirm('&Ecirc;tes-vous sûr de vouloir supprimer ?')"><span class="glyphicon glyphicon-remove" style="color: red; font-size: 40px;"></span></a></td>
                             </tr>
                     @endforeach
                     </table>

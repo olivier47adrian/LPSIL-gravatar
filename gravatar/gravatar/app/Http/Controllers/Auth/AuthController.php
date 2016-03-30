@@ -62,6 +62,16 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        $message = ("Votre inscription à Gravatar a bien été prise en compte");
+
+        // send a confirmation email
+        try{
+            mail($data['email'], 'Confirmation inscription', $message);
+        }
+        catch (Exception $e) {
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+        }
+
         return User::create([
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
